@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,10 +22,15 @@ function Login() {
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, { email, password });
-            console.log(response.data);
-            // Handle successful login (e.g., store token, redirect)
+            console.log('Login successful:', response.data);
+            navigate('/hello'); // Navigate to the new page on successful login
         } catch (error) {
-            setError(error.response?.data?.message || 'An error occurred. Please try again.');
+            console.error('Login error:', error);
+            if (error.response) {
+                setError(`Error: ${error.response.status} - ${error.response.data.message || 'credentials are incorrect'}`);
+            } else {
+                setError(`An error occurred: ${error.message}`);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -56,4 +63,6 @@ function Login() {
 }
 
 export default Login;
-        
+
+
+

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
+import Hello from './components/hello'; // Corrected the import statement for Hello component
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/hello" element={<Hello />} /> {/* Add this route */}
                 </Routes>
             </div>
         </Router>

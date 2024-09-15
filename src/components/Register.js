@@ -30,16 +30,28 @@ function Register() {
         }
 
         try {
+            console.log('Sending registration request:', formData);
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password
             });
-            console.log(response.data);
+            console.log('Registration response:', response.data);
             // Redirect to login page after successful registration
             navigate('/login');
         } catch (error) {
-            setError(error.response?.data?.message || 'An error occurred during registration');
+            console.error('Registration error:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                setError(`Error: ${error.response.status} - ${error.response.data.message || 'Unknown error'}`);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+                setError('No response from server. Please check your connection.');
+            } else {
+                console.error('Error details:', error.message);
+                setError(`An error occurred: ${error.message}`);
+            }
         } finally {
             setIsLoading(false);
         }
