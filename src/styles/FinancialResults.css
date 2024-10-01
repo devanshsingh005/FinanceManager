@@ -1,0 +1,36 @@
+.financial-results {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #e9ecef;
+  border-radius: 12px;
+}
+
+.financial-results h2 {
+  color: #28a745;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.financial-results p {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.chart-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.chart-container > div {
+  flex-basis: calc(50% - 20px);
+  margin-bottom: 30px;
+}
+
+.chart-container h3 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}

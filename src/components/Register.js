@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../AuthForms.css';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -22,35 +23,27 @@ function Register() {
         setError('');
         setIsLoading(true);
 
-        // Basic validation
-        if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match');
-            setIsLoading(false);
-            return;
-        }
-
         try {
             console.log('Sending registration request:', formData);
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, {
+            const response = await axios.post('/api/users/register', {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             console.log('Registration response:', response.data);
-            // Redirect to login page after successful registration
             navigate('/login');
         } catch (error) {
             console.error('Registration error:', error);
             if (error.response) {
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-                setError(`Error: ${error.response.status} - ${error.response.data.message || 'Unknown error'}`);
+                setError(`Server error: ${error.response.status} - ${error.response.data}`);
             } else if (error.request) {
-                console.error('No response received:', error.request);
-                setError('No response from server. Please check your connection.');
+                setError('No response from server. Please check your connection and try again.');
             } else {
-                console.error('Error details:', error.message);
-                setError(`An error occurred: ${error.message}`);
+                setError(`Error: ${error.message}`);
             }
         } finally {
             setIsLoading(false);
@@ -58,9 +51,9 @@ function Register() {
     };
 
     return (
-        <div>
+        <div className="auth-container">
             <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="auth-form">
                 <input
                     type="text"
                     name="username"
@@ -93,7 +86,7 @@ function Register() {
                     placeholder="Confirm Password"
                     required
                 />
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="error-message">{error}</p>}
                 <button type="submit" disabled={isLoading}>
                     {isLoading ? 'Registering...' : 'Register'}
                 </button>

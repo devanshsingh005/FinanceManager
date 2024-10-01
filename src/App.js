@@ -1,29 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
-import Hello from './components/hello'; // Corrected the import statement for Hello component
-import './App.css';
+import FinancialForm from './components/FinancialForm';
+import FinanceManagerHomePage from './components/FinanceManagerHomePage';
+// import './App.css';  // Keep this commented out if you're still troubleshooting style issues
+
+// Placeholder component for feature pages
+const FeaturePage = ({ feature }) => <div>Feature: {feature}</div>;
 
 function App() {
     return (
         <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li><Link to="/register">Register</Link></li>
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                    </ul>
-                </nav>
-                <Routes>
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/hello" element={<Hello />} /> {/* Add this route */}
-                </Routes>
-            </div>
+            <Routes>
+                <Route path="/" element={<FinanceManagerHomePage />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/financial-form" element={<FinancialForm />} />
+                <Route path="/features/expense-tracking" element={<FeaturePage feature="Expense Tracking" />} />
+                <Route path="/features/budget-planning" element={<FeaturePage feature="Budget Planning" />} />
+                <Route path="/features/reports" element={<FeaturePage feature="Financial Reports" />} />
+                <Route path="/features/security" element={<FeaturePage feature="Security" />} />
+                {/* Add other routes as needed */}
+            </Routes>
         </Router>
     );
 }

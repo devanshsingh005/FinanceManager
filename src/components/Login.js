@@ -1,35 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../AuthForms.css';
 
 function Login() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        setError('');
         setIsLoading(true);
-
-        if (!email || !password) {
-            setError('Please enter both email and password.');
-            setIsLoading(false);
-            return;
-        }
-
+        setError('');
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, { email, password });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
+                username,
+                password,
+            });
             console.log('Login successful:', response.data);
-            navigate('/hello'); // Navigate to the new page on successful login
+            localStorage.setItem('token', response.data.token);
+            navigate('/financial-form');
         } catch (error) {
             console.error('Login error:', error);
             if (error.response) {
-                setError(`Error: ${error.response.status} - ${error.response.data.message || 'credentials are incorrect'}`);
+                console.error('Error data:', error.response.data);
+                console.error('Error status:', error.response.status);
+                setError(`Login failed: ${error.response.status} - ${error.response.data.message || 'No message available'}`);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+                setError('Login failed: No response from server. Please check your network connection.');
             } else {
-                setError(`An error occurred: ${error.message}`);
+                console.error('Error message:', error.message);
+                setError(`Login failed: ${error.message}`);
             }
         } finally {
             setIsLoading(false);
@@ -37,12 +41,13 @@ function Login() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="auth-container">
+            <h2>Login</h2>
+            <form onSubmit={handleLogin} className="auth-form">
                 <input
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     placeholder="Email"
                     required
                 />
@@ -53,7 +58,7 @@ function Login() {
                     placeholder="Password"
                     required
                 />
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="error-message">{error}</p>}
                 <button type="submit" disabled={isLoading}>
                     {isLoading ? 'Logging in...' : 'Login'}
                 </button>

@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+  a {
+    color: #3a86ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #2667ff;
+  }
+
+  /* Layout */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .flex {
+    display: flex;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .gap-4 {
+    gap: 1rem;
+  }
+
+  /* Header */
+  header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  nav a {
+    margin-left: 1.5rem;
+    font-weight: 500;
+    color: #3a86ff;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3a86ff;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+  }
+  nav a:hover::after {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+
+  /* Main content */
+  main {
+    min-height: calc(100vh - 60px - 60px);
+  }
+
+  /* Hero section */
+  .hero {
+    background: linear-gradient(135deg, #3a86ff, #8338ec);
+    color: #fff;
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('logo192.png') center/cover no-repeat;
+    opacity: 0.1;
+  }
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+  .hero p {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  /* Features section */
+  .features {
+    padding: 6rem 0;
+    background-color: #ffffff;
+  }
+  .features h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #3a86ff;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+  }
+  .feature-item {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9ecef;
+  }
+  .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  .feature-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  }
+  .feature-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #3a86ff;
+  }
+
+  /* CTA section */
+  .cta {
+    background: linear-gradient(135deg, #8338ec, #3a86ff);
+    color: #fff;
+    padding: 6rem 0;
+    text-align: center;
+  }
+  .cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Buttons */
+  .button {
+    display: inline-block;
+    background-color: #fff;
+    color: #3a86ff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0.5rem;
+    border: 2px solid transparent;
+  }
+  .button:hover {
+    background-color: #3a86ff;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .button-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  .button-secondary:hover {
+    background-color: #fff;
+    color: #3a86ff;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  footer a {
+    color: #fff;
+    margin: 0 0.5rem;
+  }
+  footer a:hover {
+    text-decoration: underline;
+    color: #3a86ff;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta h2 {
+      font-size: 2rem;
+    }
+  }
