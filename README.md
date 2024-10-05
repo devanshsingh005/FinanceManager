@@ -13,6 +13,7 @@ The **Personal Finance Manager** is a web application designed to help users man
 - **Frontend**: React, JavaScript, CSS
 - **Backend**: Java (Spring Boot)
 - **Database**: H2
+![image](https://github.com/user-attachments/assets/67a52f77-77c0-4876-bebc-ffe221b629fa)
 
 
 
